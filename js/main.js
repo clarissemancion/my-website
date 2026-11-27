@@ -214,8 +214,13 @@ strip.addEventListener('focusin', event => {
 
 window.addEventListener('scroll', scheduleSpacesScroll, {passive:true});
 window.addEventListener('resize', sizeSpacesScroll);
+window.addEventListener('pageshow', sizeSpacesScroll);
 motionPreference.addEventListener('change', sizeSpacesScroll);
-new ResizeObserver(scheduleSpacesScroll).observe(strip);
+// Card sizes can settle after the first measurement without a window resize.
+// Recalculate both the horizontal travel and the sticky section's scroll distance.
+const galleryResize = new ResizeObserver(sizeSpacesScroll);
+galleryResize.observe(strip);
+spacesPhotos.forEach(photo => galleryResize.observe(photo));
 sizeSpacesScroll();
 const dialog=document.querySelector('.lightbox');
 const lightboxImage=document.querySelector('#lightbox-image');
