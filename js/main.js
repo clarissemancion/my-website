@@ -144,7 +144,9 @@ const spacesPhotos = [...strip.querySelectorAll('.photo')];
 const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
 const previousPhoto = controls.querySelector('[data-scroll="previous"]');
 const nextPhoto = controls.querySelector('[data-scroll="next"]');
+const phoneGalleryLayout = matchMedia('(max-width:760px)');
 let galleryTravel = 0;
+let galleryScrollRate = 1;
 let framePending = false;
 
 function galleryStart() {
@@ -154,7 +156,7 @@ function galleryStart() {
 function updateSpacesScroll() {
   framePending = false;
   if (!spaces.classList.contains('spaces-scroll')) return;
-  const position = Math.max(0, Math.min(galleryTravel, scrollY - galleryStart()));
+  const position = Math.max(0, Math.min(galleryTravel, (scrollY - galleryStart()) * galleryScrollRate));
   strip.scrollLeft = position;
   const reachedEnd = position >= galleryTravel - 1;
   previousPhoto.disabled = position < 1;
@@ -186,7 +188,8 @@ function sizeSpacesScroll() {
   spaces.style.setProperty('--spaces-top', `${top}px`);
   spaces.style.setProperty('--spaces-stage-height', `${height}px`);
   galleryTravel = Math.max(0, strip.scrollWidth - strip.clientWidth);
-  spaces.style.setProperty('--spaces-runway-height', `${height + galleryTravel}px`);
+  galleryScrollRate = phoneGalleryLayout.matches ? 0.65 : 1;
+  spaces.style.setProperty('--spaces-runway-height', `${height + galleryTravel / galleryScrollRate}px`);
   updateSpacesScroll();
 }
 
@@ -195,7 +198,7 @@ controls.querySelectorAll('[data-scroll]').forEach(button => button.addEventList
   const step = spacesPhotos[0].getBoundingClientRect().width + parseFloat(getComputedStyle(strip).gap);
   if (spaces.classList.contains('spaces-scroll')) {
     const position = Math.max(0, Math.min(galleryTravel, strip.scrollLeft + direction * step));
-    window.scrollTo({top:galleryStart() + position, behavior:'smooth'});
+    window.scrollTo({top:galleryStart() + position / galleryScrollRate, behavior:'smooth'});
   } else {
     strip.scrollBy({left:direction * step, behavior:'smooth'});
   }
@@ -206,9 +209,9 @@ strip.addEventListener('focusin', event => {
   if (!photo || !spaces.classList.contains('spaces-scroll') || document.body.classList.contains('modal-open')) return;
   const left = photo.offsetLeft - spacesPhotos[0].offsetLeft;
   const right = left + photo.getBoundingClientRect().width;
-  const position = Math.max(0, Math.min(galleryTravel, scrollY - galleryStart()));
+  const position = Math.max(0, Math.min(galleryTravel, (scrollY - galleryStart()) * galleryScrollRate));
   if (left < position || right > position + strip.clientWidth) {
-    window.scrollTo({top:galleryStart() + Math.min(galleryTravel, left), behavior:'instant'});
+    window.scrollTo({top:galleryStart() + Math.min(galleryTravel, left) / galleryScrollRate, behavior:'instant'});
   }
 });
 
