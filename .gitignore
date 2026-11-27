@@ -1,0 +1,18 @@
+# Track the static website, project instructions, and required configuration.
+/*
+!/.gitignore
+!/.nojekyll
+!/CNAME
+!/index.html
+!/README.md
+!/AGENTS.md
+!/COPYRIGHT.txt
+!/robots.txt
+!/sitemap.xml
+!/css/
+!/js/
+!/assets/
+/assets/*
+!/assets/favicon.svg
+!/assets/country_outlines.svg
+!/assets/images/

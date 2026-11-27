@@ -1,0 +1,14 @@
+Copyright © 2026 Clarisse Mancion. All rights reserved.
+
+Original photographs, written content, branding and other original creative
+materials in this repository are reserved to Clarisse Mancion to the extent
+protected by applicable law. No permission to reuse, republish, redistribute,
+sell or adapt these materials is granted by making this repository public.
+For permission, contact connect@clarissemancion.com.
+
+This notice does not restrict uses permitted by law or rights provided by
+GitHub's Terms of Service, including viewing and forking a public repository
+on GitHub. Third-party materials retain their original status and rights.
+The country outlines are derived from public-domain Natural Earth map data.
+
+This is a copyright notice, not a government registration certificate.
