@@ -284,13 +284,21 @@ nav a[aria-current="location"] {
   margin-bottom:2rem
 }
 
+.hero-offer {
+  max-width:33rem;
+  margin:1.25rem 0 0;
+  font-size:clamp(1rem,1.5vw,1.2rem);
+  line-height:1.5;
+  text-shadow:0 1px 8px #172013
+}
+
 .hero-link {
   display:inline-block;
   font-size:.875rem;
   text-decoration:none;
   border-bottom:1px solid #fff9;
   padding:.5rem 0;
-  margin-top:2.5rem
+  margin-top:1.25rem
 }
 
 .intro {
